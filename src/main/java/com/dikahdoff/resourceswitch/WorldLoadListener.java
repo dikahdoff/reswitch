@@ -54,6 +54,7 @@ public class WorldLoadListener {
 		testedsky = false;
 		skyblock = false;
 		dwarven = false;
+		unloadResource();
 	}
 	
 	@SubscribeEvent
@@ -66,7 +67,6 @@ public class WorldLoadListener {
 				if(item.getDisplayName().contains("SkyBlock Menu")) {
 					player.addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + "You are in a SkyBlock Server."));
 					skyblock = true;
-					unloadResource();
 					LogHelper.log(Level.INFO, "YOU_ARE_IN_SKYBLOCK");
 				}
 			} else {

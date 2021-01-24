@@ -18,21 +18,10 @@ import com.dikahdoff.resourceswitch.WorldLoadListener;
 public class ResSwitch
 {
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        System.out.println("ResourceSwitcher started the preInit process...");
-    }
-    
-    @EventHandler
     public void init(FMLInitializationEvent event)
     {
         System.out.println("ResourceSwitcher started the init process...");
         MinecraftForge.EVENT_BUS.register(new com.dikahdoff.resourceswitch.WorldLoadListener());
-    }
-    
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        System.out.println("ResourceSwitcher started the postInit process...");
+        System.out.println("ResourceSwitcher finished the init process.");
     }
 }
