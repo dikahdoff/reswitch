@@ -113,15 +113,7 @@ public class WorldLoadListener {
 					while ((line = reader.readLine()) != null) {
 						data += line + "\n";
 					}
-					int j = 0;
-					for (String retval: data.split("|")) {
-						if(j == 0) {
-							// Automatic resourcepack update feature, will be added in the future.
-						} else {
-							resourcePackURL = retval;
-						}
-				        j++;
-				    }
+					resourcePackURL = data;
 				} catch(Exception ex) {
 					LogHelper.log(Level.ERROR, "ERROR: Couldn't get resourcepack URL. " + ex);
 				}
