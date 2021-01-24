@@ -39,8 +39,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class WorldLoadListener {
-	public static String packName = "DwarvenMinesPack (DON'T RENAME ME)";
-	public static String packURL = "https://pastebin.com/raw/jskED8Wt";
+	public static String packName = "pack";
 	public static String gameDir = Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + "/";
 	
 	public boolean testedsky = false;
@@ -89,47 +88,20 @@ public class WorldLoadListener {
 	
 	public void loadResource() {
 		LogHelper.log(Level.INFO, "Loading resourcepack...");
-		ResourcePackRepository repo = Minecraft.getMinecraft().getResourcePackRepository();
-		List<ResourcePackRepository.Entry> rpEnabled = repo.getRepositoryEntries();
-		ResourcePackRepository.Entry pack = null;
-		for(ResourcePackRepository.Entry rp : repo.getRepositoryEntriesAll()){
-			if(rp.getResourcePackName().equals(packName + ".zip")){
-				pack = rp;
-				break;
-			}
-		}
 		boolean canContinue = false;
-		int i = 0;
 		while(!canContinue) {
+			ResourcePackRepository repo = Minecraft.getMinecraft().getResourcePackRepository();
+			List<ResourcePackRepository.Entry> rpEnabled = repo.getRepositoryEntries();
+			ResourcePackRepository.Entry pack = null;
+			for(ResourcePackRepository.Entry rp : repo.getRepositoryEntriesAll()){
+				if(rp.getResourcePackName().equals(packName + ".zip")){
+					pack = rp;
+					break;
+				}
+			}
 			if (pack==null){
 				LogHelper.log(Level.ERROR, "ERROR: Resource pack not found.");
-				String resourcePackURL = null;
-				try {
-					URL url = new URL(packURL);
-					URLConnection connection = url.openConnection();
-					BufferedReader reader = new BufferedReader(new InputStreamReader(
-						connection.getInputStream()));
-					String line = null, data = "";
-					while ((line = reader.readLine()) != null) {
-						data += line + "\n";
-					}
-					resourcePackURL = data;
-				} catch(Exception ex) {
-					LogHelper.log(Level.ERROR, "ERROR: Couldn't get resourcepack URL. " + ex);
-				}
-				if(resourcePackURL != null) {
-					LogHelper.log(Level.INFO, "Got URL: " + resourcePackURL);
-					try {
-						download(resourcePackURL, gameDir + "resourcepacks/" + packName + ".zip");
-					} catch (Exception e) {
-						LogHelper.log(Level.FATAL, "Couldn't download resourcepack." + e);
-					}
-				}
-				if(i > 4)  {
-					canContinue = true;
-					LogHelper.log(Level.FATAL, "ERROR: Couldn't get resourcepack.");
-				}
-				i++;
+				canContinue = true;
 			}
 			else{
 				LogHelper.log(Level.INFO, "Resource pack found... enabling...");
