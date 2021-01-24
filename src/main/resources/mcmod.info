@@ -1,0 +1,16 @@
+[
+{
+  "modid": "reswitch",
+  "name": "Resource Switcher",
+  "description": "Automatically switches to the Dwarven Mines resourcepack, in the Dwarven Mines on the hypixel.net Server's SkyBlock Minigame.",
+  "version": "${version}",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "https://github.com/dikahdoff/reswitch/",
+  "authorList": ["dikahdoff"],
+  "credits": "dikahdoff",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
